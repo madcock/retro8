@@ -120,6 +120,10 @@ inline void DSP::noise(uint32_t frequency, int16_t amplitude, int32_t position, 
   static const int table_size = 1 << (batch + significant_bits);
   static const int table_mask = table_size - 1;
   static uint8_t polytable[table_size];
+
+  if (!amplitude)
+    return;
+
   if (polytable[1] == 0) {
     for (size_t i = 1; i < table_size; ++i)
     {
