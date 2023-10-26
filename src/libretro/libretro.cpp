@@ -16,7 +16,11 @@
 
 namespace r8 = retro8;
 
+#if !defined(SF2000)
 constexpr int SAMPLE_RATE = 44100;
+#else
+constexpr int SAMPLE_RATE = 11025;
+#endif
 constexpr int SAMPLES_PER_FRAME = SAMPLE_RATE / 60;
 constexpr int SOUND_CHANNELS = 2;
 

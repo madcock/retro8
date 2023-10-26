@@ -256,8 +256,11 @@ void APU::handleCommands()
           channel.end = s.end;
           channel.sample = s.start;
 
+#if !defined(SF2000)
           size_t samplePerTick = (44100 / 128) * (channel.sound->speed + 1);
-
+#else
+          size_t samplePerTick = (11025 / 128) * (channel.sound->speed + 1);
+#endif
           channel.position = s.start*samplePerTick;
         }
       }
@@ -424,7 +427,11 @@ void APU::renderSounds(int16_t* dest, size_t totalSamples)
     {
       if (channel.sound)
       {
+#if !defined(SF2000)
         const size_t samplePerTick = (44100 / 128) * (channel.sound->speed + 1);
+#else
+        const size_t samplePerTick = (11025 / 128) * (channel.sound->speed + 1);
+#endif
         while (samples > 0 && channel.sound)
         {
           /* generate the maximum amount of samples available for same note */

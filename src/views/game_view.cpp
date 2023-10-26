@@ -34,7 +34,11 @@ void SDLAudio::audio_callback(void* data, uint8_t* cbuffer, int length)
 void SDLAudio::init(retro8::sfx::APU* apu)
 {
   SDL_AudioSpec wantSpec;
+#if !defined(SF2000)
   wantSpec.freq = 44100;
+#else
+  wantSpec.freq = 11025;
+#endif
   wantSpec.format = AUDIO_S16SYS;
   wantSpec.channels = 1;
   wantSpec.samples = 2048;

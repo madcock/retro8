@@ -228,7 +228,11 @@ namespace retro8
       
 
     public:
+#if !defined(SF2000)
       APU(Memory& memory) : memory(memory), dsp(44100), _soundEnabled(true), _musicEnabled(true) { }
+#else
+      APU(Memory& memory) : memory(memory), dsp(11025), _soundEnabled(true), _musicEnabled(true) { }
+#endif
 
       void init();
 
